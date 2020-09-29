@@ -1,0 +1,196 @@
+*{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+}
+  
+body {
+    background-color: #FFFACD;
+
+    font-family: "Tahoma";
+    font-size: 16px;
+}
+
+.clear {
+    clear: both;
+}
+
+.container {
+    width: 940px;
+    margin-right: auto;
+    margin-left: auto;
+}
+  
+
+.left {
+    width: 280px;
+    float: left;
+    position: fixed;
+    top: 0;
+}
+
+.list {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid gray;
+
+}
+
+#list-id {
+    font-size: 32px;
+    padding-bottom: 20px;
+}
+
+.list ul {
+    margin: 20px;
+}
+
+.list li {
+    margin: 10px;
+    list-style-type: square;
+}
+
+.list li a {
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.list li a:hover {
+    color: white;
+    background-color: #4CAF50;
+}
+
+.left-footer {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.left-footer ul {
+    text-align: center;
+}
+
+.left-footer li {
+    margin: auto;
+    width: 60%;
+}
+
+.left-footer li a {
+    display: inline-block;
+    font-size: 13px;
+    color: tomato ;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 15px;
+    border: none;
+    border-radius: 4px;   
+}
+  
+.left-footer li a:hover {
+    color: white;
+    background-color: tomato;
+}
+
+.right {
+    width: 640px;
+    float: right;
+}
+
+.right .entry {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid gray;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.right #entry-title {
+    font-size: 32px;
+}
+
+.right #entry-content {
+    margin-top: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+}
+
+.right #entry-author {
+    float: right;
+}
+
+.right .new-entry {
+    padding-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.right .new-entry form{
+    padding: 20px;
+
+}
+
+.right .new-entry input[type=text], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+.right .new-entry input[type=password], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+.right .new-entry label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+  
+.right .new-entry input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+}
+  
+.right .new-entry input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+.right-footer {
+    padding-bottom: 20px;
+    margin: auto;
+    width: 50%;
+}
+
+.right-footer li {
+    float: left;
+    
+}
+.right-footer li a {
+    display: inline-block;
+    font-size: 13px;
+    color: tomato;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 15px;
+    border: none;
+    border-radius: 4px;
+   
+}
+  
+.right-footer li a:hover {
+    color: white;
+    background-color: tomato;
+}

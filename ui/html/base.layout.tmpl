@@ -1,0 +1,89 @@
+{{define "base"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{{template "title" .}} - EskiSözlük</title>
+<link rel='stylesheet' href='/static/css/reset.css'>
+<link rel='stylesheet' href='/static/css/main.css'>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="left">
+            <div class="list">
+                <h2 id="list-id">gündem</h2>
+                    <ul>
+                        <li>
+                            <a href="">amiga</a>
+                        </li>
+                        <li>
+                            <a href="">commodore</a>
+                        </li>
+                        <li>
+                            <a href="">amstrad</a>
+                        </li>
+                        <li>
+                            <a href="">amiga</a>
+                        </li>
+                        <li>
+                            <a href="">commodore</a>
+                        </li>
+                        <li>
+                            <a href="">amstrad</a>
+                        </li>
+                        <li>
+                            <a href="">amiga</a>
+                        </li>
+                        <li>
+                            <a href="">commodore</a>
+                        </li>
+                        <li>
+                            <a href="">amstrad</a>
+                        </li>
+                        <li>
+                            <a href="">amiga</a>
+                        </li>
+                        
+                    </ul>
+            </div>
+            <div class="left-footer">
+                {{template "footer" .}}
+            </div>
+        </div>
+        <div class="right">
+            <div class="entry">
+                <h2 id="entry-title">bir entry baslıgı</h2>
+                <p id="entry-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce viverra metus ligula. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis a dui dui. Suspendisse dapibus magna non turpis malesuada, sit amet lobortis quam porta. Ut malesuada risus non leo sollicitudin rhoncus. Fusce sed lorem malesuada, maximus est eget, facilisis tellus. Nam aliquam ante et efficitur imperdiet. Nulla eu risus mauris.
+                </p>
+                <p id="entry-author">(ssg 2/15/1999)</p>
+                <div class="clear"></div>
+            </div>
+
+            <div class="new-entry">
+                <p>bu konuda eklemek istediğiniz bir şey varsa neden olmasın..</p>
+
+                <form action="/action_page.php">
+                <label for="fname">nickiniz:</label>
+                <input type="text" id="fname" name="fname">
+                <label for="pwd">şifresi:</label>
+                <input type="password" id="pwd" name="pwd">
+                <label for="lname">bildikleriniz:</label>
+                <textarea name="message" rows="10" cols="30"></textarea> 
+                <br><br>
+                <input type="submit" value="yolla">
+                <div class="clear"></div>
+                </form> 
+                
+            </div>
+            <div class="right-footer">
+                {{template "footer" .}}
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+{{end}}
