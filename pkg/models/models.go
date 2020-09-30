@@ -7,7 +7,7 @@ import (
 
 var ErrNoRecord = errors.New("models: no matching record found")
 
-type Sozluk struct {
+type Entry struct {
 	ID      int
 	Title   string
 	Content string

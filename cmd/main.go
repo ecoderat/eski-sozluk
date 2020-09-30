@@ -15,7 +15,7 @@ import (
 type application struct {
 	errorLog *log.Logger
 	infoLog  *log.Logger
-	sozluk   *mysql.SozlukModel
+	entries  *mysql.EntryModel
 }
 
 func main() {
@@ -36,7 +36,7 @@ func main() {
 	app := &application{
 		errorLog: errorLog,
 		infoLog:  infoLog,
-		sozluk:   &mysql.SozlukModel{DB: db},
+		entries:  &mysql.EntryModel{DB: db},
 	}
 
 	srv := &http.Server{

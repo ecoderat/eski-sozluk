@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"html/template"
 	"net/http"
 )
 
@@ -12,21 +11,13 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	files := []string{
-		"./ui/html/home.page.tmpl",
-		"./ui/html/base.layout.tmpl",
-		"./ui/html/footer.partial.tmpl",
-	}
-
-	ts, err := template.ParseFiles(files...)
+	s, err := app.entries.Latest()
 	if err != nil {
 		app.serverError(w, err)
 		return
 	}
-
-	err = ts.Execute(w, nil)
-	if err != nil {
-		app.serverError(w, err)
+	for _, snippet := range s {
+		fmt.Fprintf(w, "%v\n", snippet)
 	}
 
 }
@@ -38,7 +29,15 @@ func (app *application) showTopic(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Fprintf(w, "Display a specific topic with name %s...\n", name)
+	s, err := app.entries.GetTopic(name)
+	if err != nil {
+		app.serverError(w, err)
+		return
+	}
+
+	for _, entry := range s {
+		fmt.Fprintf(w, "%v\n", entry)
+	}
 
 }
 
@@ -53,7 +52,7 @@ func (app *application) createEntry(w http.ResponseWriter, r *http.Request) {
 	content := "gitar çalmak için kullanılır."
 	user := "ssg"
 
-	name, err := app.sozluk.Insert(title, content, user)
+	name, err := app.entries.Insert(title, content, user)
 	if err != nil {
 		app.serverError(w, err)
 		return
