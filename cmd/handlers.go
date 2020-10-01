@@ -1,9 +1,11 @@
 package main
 
 import (
+	"errors"
 	"fmt"
-	"html/template"
 	"net/http"
+
+	"github.com/ecoderat/eski-sozluk/pkg/models"
 )
 
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
@@ -24,24 +26,11 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	data := &templateData{Entries: s, Entry: s[0], Topics: t}
-
-	files := []string{
-		"./ui/html/home.page.tmpl",
-		"./ui/html/base.layout.tmpl",
-		"./ui/html/footer.partial.tmpl",
-	}
-
-	ts, err := template.ParseFiles(files...)
-	if err != nil {
-		app.serverError(w, err)
-		return
-	}
-
-	err = ts.Execute(w, data)
-	if err != nil {
-		app.serverError(w, err)
-	}
+	app.render(w, r, "home.page.tmpl", &templateData{
+		Entries: s,
+		Entry:   s[0],
+		Topics:  t,
+	})
 
 }
 
@@ -54,7 +43,11 @@ func (app *application) showTopic(w http.ResponseWriter, r *http.Request) {
 
 	s, err := app.entries.GetTopic(name)
 	if err != nil {
-		app.serverError(w, err)
+		if errors.Is(err, models.ErrNoRecord) {
+			app.notFound(w)
+		} else {
+			app.serverError(w, err)
+		}
 		return
 	}
 
@@ -64,28 +57,11 @@ func (app *application) showTopic(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// for _, entry := range s {
-	// 	fmt.Fprintf(w, "%v\n", entry)
-	// }
-
-	data := &templateData{Entries: s, Entry: s[0], Topics: t}
-
-	files := []string{
-		"./ui/html/topic.page.tmpl",
-		"./ui/html/base.layout.tmpl",
-		"./ui/html/footer.partial.tmpl",
-	}
-
-	ts, err := template.ParseFiles(files...)
-	if err != nil {
-		app.serverError(w, err)
-		return
-	}
-
-	err = ts.Execute(w, data)
-	if err != nil {
-		app.serverError(w, err)
-	}
+	app.render(w, r, "topic.page.tmpl", &templateData{
+		Entries: s,
+		Entry:   s[0],
+		Topics:  t,
+	})
 
 }
 

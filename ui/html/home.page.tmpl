@@ -13,6 +13,6 @@
 {{define "entry"}}
     <a href='/topic?name={{.Entry.Title}}' id="entry-title">{{.Entry.Title}}</a>
         <p id="entry-content">{{.Entry.Content}}</p>
-        <p id="entry-author">({{.Entry.User}} {{.Entry.Created}} )</p>
+        <p id="entry-author">({{.Entry.User}} {{humanDate .Entry.Created}} )</p>
         <div class="clear"></div>
 {{end}}

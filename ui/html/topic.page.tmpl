@@ -14,7 +14,7 @@
     <a href='/topic?name={{.Entry.Title}}' id="entry-title">{{.Entry.Title}}</a>   
     {{range .Entries}}
         <p id="entry-content">{{.Content}}</p>
-        <p id="entry-author">({{.User}} {{.Created}} )</p>
+        <p id="entry-author">({{.User}} {{humanDate .Created}} )</p>
         <div class="clear"></div>
     {{end}} 
 {{end}}
