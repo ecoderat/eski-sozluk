@@ -15,37 +15,7 @@
             <div class="list">
                 <h2 id="list-id">gündem</h2>
                     <ul>
-                        <li>
-                            <a href="">amiga</a>
-                        </li>
-                        <li>
-                            <a href="">commodore</a>
-                        </li>
-                        <li>
-                            <a href="">amstrad</a>
-                        </li>
-                        <li>
-                            <a href="">amiga</a>
-                        </li>
-                        <li>
-                            <a href="">commodore</a>
-                        </li>
-                        <li>
-                            <a href="">amstrad</a>
-                        </li>
-                        <li>
-                            <a href="">amiga</a>
-                        </li>
-                        <li>
-                            <a href="">commodore</a>
-                        </li>
-                        <li>
-                            <a href="">amstrad</a>
-                        </li>
-                        <li>
-                            <a href="">amiga</a>
-                        </li>
-                        
+                        {{template "list" .}}
                     </ul>
             </div>
             <div class="left-footer">
@@ -54,11 +24,7 @@
         </div>
         <div class="right">
             <div class="entry">
-                <h2 id="entry-title">bir entry baslıgı</h2>
-                <p id="entry-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce viverra metus ligula. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis a dui dui. Suspendisse dapibus magna non turpis malesuada, sit amet lobortis quam porta. Ut malesuada risus non leo sollicitudin rhoncus. Fusce sed lorem malesuada, maximus est eget, facilisis tellus. Nam aliquam ante et efficitur imperdiet. Nulla eu risus mauris.
-                </p>
-                <p id="entry-author">(ssg 2/15/1999)</p>
-                <div class="clear"></div>
+                {{template "entry" .}}
             </div>
 
             <div class="new-entry">

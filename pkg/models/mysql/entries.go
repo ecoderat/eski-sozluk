@@ -61,7 +61,7 @@ func (m *EntryModel) GetTopic(title string) ([]*models.Entry, error) {
 
 func (m *EntryModel) Latest() ([]*models.Entry, error) {
 	stmt := `SELECT id, title, content, user, created FROM sozluk 
-	ORDER BY created DESC LIMIT 10`
+	ORDER BY created DESC LIMIT 100`
 
 	rows, err := m.DB.Query(stmt)
 	if err != nil {
@@ -88,4 +88,43 @@ func (m *EntryModel) Latest() ([]*models.Entry, error) {
 	}
 
 	return entries, nil
+}
+
+func (m *EntryModel) LatestTopics() ([]string, error) {
+	stmt := `SELECT title FROM sozluk
+	ORDER BY created DESC LIMIT 100`
+
+	rows, err := m.DB.Query(stmt)
+	if err != nil {
+		return nil, err
+	}
+
+	defer rows.Close()
+
+	var titles []string
+
+	value := make(map[string]bool)
+
+	for rows.Next() {
+
+		s := ""
+
+		err = rows.Scan(&s)
+		if err != nil {
+			return nil, err
+		}
+
+		if value[s] == false {
+			titles = append(titles, s)
+			value[s] = true
+		}
+
+	}
+
+	if err = rows.Err(); err != nil {
+		return nil, err
+	}
+
+	return titles, nil
+
 }

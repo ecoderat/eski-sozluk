@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"html/template"
 	"net/http"
 )
 
@@ -16,8 +17,30 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 		app.serverError(w, err)
 		return
 	}
-	for _, snippet := range s {
-		fmt.Fprintf(w, "%v\n", snippet)
+
+	t, err := app.entries.LatestTopics()
+	if err != nil {
+		app.serverError(w, err)
+		return
+	}
+
+	data := &templateData{Entries: s, Entry: s[0], Topics: t}
+
+	files := []string{
+		"./ui/html/home.page.tmpl",
+		"./ui/html/base.layout.tmpl",
+		"./ui/html/footer.partial.tmpl",
+	}
+
+	ts, err := template.ParseFiles(files...)
+	if err != nil {
+		app.serverError(w, err)
+		return
+	}
+
+	err = ts.Execute(w, data)
+	if err != nil {
+		app.serverError(w, err)
 	}
 
 }
@@ -35,8 +58,33 @@ func (app *application) showTopic(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	for _, entry := range s {
-		fmt.Fprintf(w, "%v\n", entry)
+	t, err := app.entries.LatestTopics()
+	if err != nil {
+		app.serverError(w, err)
+		return
+	}
+
+	// for _, entry := range s {
+	// 	fmt.Fprintf(w, "%v\n", entry)
+	// }
+
+	data := &templateData{Entries: s, Entry: s[0], Topics: t}
+
+	files := []string{
+		"./ui/html/topic.page.tmpl",
+		"./ui/html/base.layout.tmpl",
+		"./ui/html/footer.partial.tmpl",
+	}
+
+	ts, err := template.ParseFiles(files...)
+	if err != nil {
+		app.serverError(w, err)
+		return
+	}
+
+	err = ts.Execute(w, data)
+	if err != nil {
+		app.serverError(w, err)
 	}
 
 }
