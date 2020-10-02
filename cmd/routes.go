@@ -1,14 +1,21 @@
 package main
 
-import "net/http"
+import (
+	"net/http"
 
-func (app *application) routes() *http.ServeMux {
-	mux := http.NewServeMux()
-	mux.HandleFunc("/", app.home)
-	mux.HandleFunc("/topic", app.showTopic)
-	mux.HandleFunc("/topic/create", app.createEntry)
+	"github.com/bmizerany/pat"
+)
+
+func (app *application) routes() http.Handler {
+
+	mux := pat.New()
+	mux.Get("/", http.HandlerFunc(app.home))
+	mux.Get("/topic/:name", http.HandlerFunc(app.showTopic))
+	mux.Get("/topic/create", http.HandlerFunc(app.createEntry))
+	mux.Post("/topic/create", http.HandlerFunc(app.createEntry))
 
 	fileServer := http.FileServer(http.Dir("./ui/static/"))
-	mux.Handle("/static/", http.StripPrefix("/static", fileServer))
+	mux.Get("/static/", http.StripPrefix("/static", fileServer))
+
 	return mux
 }

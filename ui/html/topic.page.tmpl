@@ -5,16 +5,32 @@
 {{define "list"}}
     {{range $element := .Topics}}
     <li>
-        <a href="/topic?name={{$element}}">{{$element}}</a>
+        <a href="/topic/{{$element}}">{{$element}}</a>
     </li>
     {{end}}
 {{end}}
 
 {{define "entry"}}
-    <a href='/topic?name={{.Entry.Title}}' id="entry-title">{{.Entry.Title}}</a>   
+    <a href='/topic/{{.Entry.Title}}' id="entry-title">{{.Entry.Title}}</a>   
     {{range .Entries}}
         <p id="entry-content">{{.Content}}</p>
         <p id="entry-author">({{.User}} {{humanDate .Created}} )</p>
         <div class="clear"></div>
     {{end}} 
+{{end}}
+
+{{define "new-entry"}}
+    <p>bu konuda eklemek istediğiniz bir şey varsa neden olmasın..</p>
+        <form action='/topic/create' method='POST'>
+        <input type="hidden" id="custId" name="title" value='{{.Entry.Title}}'>
+        <label for="fname">nickiniz:</label>
+        <input type="text" id="fname" name="user">
+        <label for="pwd">şifresi:</label>
+        <input type="password" id="pwd" name="pwd">
+        <label for="lname">bildikleriniz:</label>
+        <textarea name="content" rows="10" cols="30"></textarea> 
+        <br><br>
+        <input type="submit" value="yolla">
+        <div class="clear"></div>
+        </form> 
 {{end}}

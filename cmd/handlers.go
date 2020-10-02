@@ -9,10 +9,10 @@ import (
 )
 
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/" {
-		app.notFound(w)
-		return
-	}
+	// if r.URL.Path != "/" {
+	// 	app.notFound(w)
+	// 	return
+	// }
 
 	s, err := app.entries.Latest()
 	if err != nil {
@@ -35,7 +35,7 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 }
 
 func (app *application) showTopic(w http.ResponseWriter, r *http.Request) {
-	name := r.URL.Query().Get("name")
+	name := r.URL.Query().Get(":name")
 	if name == "" {
 		app.notFound(w)
 		return
@@ -66,15 +66,15 @@ func (app *application) showTopic(w http.ResponseWriter, r *http.Request) {
 }
 
 func (app *application) createEntry(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		w.Header().Set("Allow", http.MethodPost)
-		app.clientError(w, http.StatusMethodNotAllowed)
+	err := r.ParseForm()
+	if err != nil {
+		app.clientError(w, http.StatusBadRequest)
 		return
 	}
 
-	title := "pena"
-	content := "gitar çalmak için kullanılır."
-	user := "ssg"
+	title := r.PostForm.Get("title")
+	content := r.PostForm.Get("content")
+	user := r.PostForm.Get("user")
 
 	name, err := app.entries.Insert(title, content, user)
 	if err != nil {
@@ -82,5 +82,5 @@ func (app *application) createEntry(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	http.Redirect(w, r, fmt.Sprintf("/topic?name=%s", name), http.StatusSeeOther)
+	http.Redirect(w, r, fmt.Sprintf("/topic/%s", name), http.StatusSeeOther)
 }

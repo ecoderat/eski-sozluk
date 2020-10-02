@@ -18,9 +18,9 @@ go run ./cmd
 - [x] Latest entry fetching properly to homepage
 - [x] Topics list on homepage is fetching properly
 - [x] Topics list on topicpage is fetching properly
-- [ ] Creating an entry with http POST request
-- [ ] Implementing the form
-- [ ] Adding an entry to a topic using the form (no user and password control)
+- [x] Adding an entry to a topic with the form (no authentication yet)
+- [ ] Creating a new topic 
+- [ ] Adding middleware
 
 #### features related to user
 - [ ] Running a HTTPS server
@@ -28,7 +28,5 @@ go run ./cmd
 - [ ] User authentication
 - [ ] Creating a users model
 
-#### features related to creating a new topic
-...
 #### entry search features
 ...
