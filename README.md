@@ -72,7 +72,7 @@ go run ./cmd
 - [x] Topics list on homepage is fetching properly
 - [x] Topics list on topicpage is fetching properly
 - [x] Adding an entry to a topic with the form (no authentication yet)
-- [ ] Creating a new topic 
+- [x] Creating a new topic 
 - [ ] Adding middleware
 
 #### features related to user
