@@ -2,6 +2,7 @@ package main
 
 import (
 	"html/template"
+	"net/url"
 	"path/filepath"
 	"time"
 
@@ -9,9 +10,11 @@ import (
 )
 
 type templateData struct {
-	Entry   *models.Entry
-	Entries []*models.Entry
-	Topics  []string
+	FormData   url.Values
+	FormErrors map[string]string
+	Entry      *models.Entry
+	Entries    []*models.Entry
+	Topics     []string
 }
 
 func humanDate(t time.Time) string {

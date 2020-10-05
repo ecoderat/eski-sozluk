@@ -153,7 +153,7 @@ body {
 
 .right .new-entry label {
     padding: 12px 12px 12px 0;
-    display: inline-block;
+    display: block;
 }
   
 .right .new-entry input[type=submit] {
@@ -168,6 +168,18 @@ body {
   
 .right .new-entry input[type=submit]:hover {
     background-color: #45a049;
+}
+
+.error {
+    color: #ff2100;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 9px;
+}
+
+.error + textarea, .error + input {
+    border-color: #ff2100 !important;
+    border-width: 2px !important;
 }
 
 .right-footer {
