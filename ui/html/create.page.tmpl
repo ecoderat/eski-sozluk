@@ -2,14 +2,6 @@
 
 {{define "title"}}Create a New Topic{{end}}
 
-{{define "list"}}
-    {{range $element := .Topics}}
-    <li>
-        <a href="/topic/{{$element}}">{{$element}}</a>
-    </li>
-    {{end}}
-{{end}}
-
 {{define "entry"}}
 <style>
 .right .entry {display: none;}

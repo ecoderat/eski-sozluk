@@ -2,14 +2,6 @@
 
 {{define "title"}}Home{{end}}
 
-{{define "list"}}
-    {{range $element := .Topics}}
-    <li>
-        <a href="/topic/{{$element}}">{{$element}}</a>
-    </li>
-    {{end}}
-{{end}}
-
 {{define "entry"}}
     <a href='/topic/{{.Entry.Title}}' id="entry-title">{{.Entry.Title}}</a>
         <p id="entry-content">{{.Entry.Content}}</p>

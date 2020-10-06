@@ -22,11 +22,6 @@ func (m *EntryModel) Insert(title, content, user string) (string, error) {
 	return title, nil
 }
 
-func (m *EntryModel) Get(id int) (*models.Entry, error) {
-
-	return nil, nil
-}
-
 func (m *EntryModel) GetTopic(title string) ([]*models.Entry, error) {
 	stmt := `SELECT id, title, content, user, created FROM sozluk 
 	WHERE title = ?`
@@ -53,6 +48,10 @@ func (m *EntryModel) GetTopic(title string) ([]*models.Entry, error) {
 
 	if err = rows.Err(); err != nil {
 		return nil, err
+	}
+
+	if len(entries) == 0 {
+		return nil, models.ErrNoRecord
 	}
 
 	return entries, nil

@@ -1,0 +1,7 @@
+{{define "list"}}
+    {{range $element := .Topics}}
+    <li>
+        <a href="/topic/{{$element}}">{{$element}}</a>
+    </li>
+    {{end}}
+{{end}}
