@@ -2,19 +2,18 @@ package main
 
 import (
 	"html/template"
-	"net/url"
 	"path/filepath"
 	"time"
 
+	"github.com/ecoderat/eski-sozluk/pkg/forms"
 	"github.com/ecoderat/eski-sozluk/pkg/models"
 )
 
 type templateData struct {
-	FormData   url.Values
-	FormErrors map[string]string
-	Entry      *models.Entry
-	Entries    []*models.Entry
-	Topics     []string
+	Form    *forms.Form
+	Entry   *models.Entry
+	Entries []*models.Entry
+	Topics  []string
 }
 
 func humanDate(t time.Time) string {

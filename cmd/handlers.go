@@ -4,8 +4,8 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
-	"strings"
-	"unicode/utf8"
+
+	"github.com/ecoderat/eski-sozluk/pkg/forms"
 
 	"github.com/ecoderat/eski-sozluk/pkg/models"
 )
@@ -70,43 +70,27 @@ func (app *application) createEntry(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	title := r.PostForm.Get("title")
-	content := r.PostForm.Get("content")
-	user := r.PostForm.Get("user")
+	form := forms.New(r.PostForm)
+	form.Required("title", "content", "user")
+	form.MaxLength("title", 50)
+	form.MaxLength("user", 40)
 
-	errors := make(map[string]string)
-
-	if strings.TrimSpace(title) == "" {
-		errors["title"] = "This field cannot be blank"
-	} else if utf8.RuneCountInString(title) > 50 {
-		errors["title"] = "This field is too long (maximum is 50 characters)"
-	}
-
-	if strings.TrimSpace(content) == "" {
-		errors["content"] = "This field cannot be blank"
-	}
-
-	if strings.TrimSpace(user) == "" {
-		errors["user"] = "This field cannot be blank"
-	} else if utf8.RuneCountInString(user) > 40 {
-		errors["user"] = "This field is too long (maximum is 40 characters)"
-	}
-
-	if len(errors) > 0 {
+	if !form.Valid() {
 		t, err := app.entries.LatestTopics()
 		if err != nil {
 			app.serverError(w, err)
 			return
 		}
+
 		app.render(w, r, "create.page.tmpl", &templateData{
-			FormErrors: errors,
-			FormData:   r.PostForm,
-			Topics:     t,
+			Form:   form,
+			Topics: t,
 		})
+
 		return
 	}
 
-	name, err := app.entries.Insert(title, content, user)
+	name, err := app.entries.Insert(form.Get("title"), form.Get("content"), form.Get("user"))
 	if err != nil {
 		app.serverError(w, err)
 		return
@@ -123,7 +107,10 @@ func (app *application) createEntryForm(w http.ResponseWriter, r *http.Request) 
 		return
 	}
 
+	form := forms.New(r.PostForm)
+
 	app.render(w, r, "create.page.tmpl", &templateData{
+		Form:   form,
 		Topics: t,
 	})
 

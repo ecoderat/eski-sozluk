@@ -10,26 +10,28 @@
 
 {{define "new-entry"}}
 <a href="/topic/create" style="color:black;text-decoration: none;font-size:32px;">yeni konu</a>
-        <form action='/topic/create' method='POST'>
-        <label for="fname">başlık:</label>
-        {{with .FormErrors.title}}
-            <label class='error'>{{.}}</label>
+    <form action='/topic/create' method='POST'>
+        {{with .Form}}
+            <label for="fname">başlık:</label>
+            {{with .Errors.Get "title"}}
+                <label class='error'>{{.}}</label>
+            {{end}}
+            <input type="text" id="fname" name="title" value='{{.Get "title"}}'>
+            <label for="lname">bildikleriniz:</label>
+            {{with .Errors.Get "content"}}
+                <label class='error'>{{.}}</label>
+            {{end}}
+            <textarea name="content" rows="10" cols="30">{{.Get "content"}}</textarea>
+            <label for="fname">nickiniz:</label>
+            {{with .Errors.Get "user"}}
+                <label class='error'>{{.}}</label>
+            {{end}}
+            <input type="text" id="fname" name="user" value='{{.Get "user"}}'>
+            <label for="pwd">şifresi:</label>
+            <input type="password" id="pwd" name="pwd"> 
+            <br><br>
+            <input type="submit" value="yolla">
+            <div class="clear"></div>
         {{end}}
-        <input type="text" id="fname" name="title" value='{{.FormData.Get "title"}}'>
-        <label for="lname">bildikleriniz:</label>
-        {{with .FormErrors.content}}
-            <label class='error'>{{.}}</label>
-        {{end}}
-        <textarea name="content" rows="10" cols="30">{{.FormData.Get "content"}}</textarea>
-        <label for="fname">nickiniz:</label>
-        {{with .FormErrors.user}}
-            <label class='error'>{{.}}</label>
-        {{end}}
-        <input type="text" id="fname" name="user" value='{{.FormData.Get "user"}}'>
-        <label for="pwd">şifresi:</label>
-        <input type="password" id="pwd" name="pwd"> 
-        <br><br>
-        <input type="submit" value="yolla">
-        <div class="clear"></div>
-        </form> 
+    </form> 
 {{end}}
