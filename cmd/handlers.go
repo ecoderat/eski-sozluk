@@ -93,7 +93,7 @@ func (app *application) createEntry(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		if errors.Is(err, models.ErrInvalidCredentials) {
 			form.Errors.Add("generic", "Name or Password is incorrect")
-			app.render(w, r, "create.page.tmpl", &templateData{Form: form})
+			app.render(w, r, "create.page.tmpl", &templateData{Form: form, Topics: t})
 		} else {
 			app.serverError(w, err)
 		}
