@@ -39,6 +39,16 @@ created DATETIME NOT NULL,
 -- Add an index on the created column.
 CREATE INDEX idx_sozluk_created ON sozluk(created);
 ```
+to create a users model:
+```SQL
+CREATE TABLE users (
+id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+name VARCHAR(40) NOT NULL,
+hashed_password CHAR(60) NOT NULL,
+created DATETIME NOT NULL
+);
+ALTER TABLE users ADD CONSTRAINT users_uc_name UNIQUE (name);
+```
 creating a new user:
 ```SQL
 CREATE USER 'web'@'localhost';
@@ -84,3 +94,10 @@ go run ./cmd
 
 #### entry search features
 ...
+
+#### testing
+- [ ] Unit Tests
+- [ ] Handler Tests
+- [ ] Middleware Tests
+- [ ] End to End Tests
+- [ ] Integration Tests
