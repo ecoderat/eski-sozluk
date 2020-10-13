@@ -64,7 +64,12 @@ func (app *application) showTopic(w http.ResponseWriter, r *http.Request) {
 }
 
 func (app *application) createEntry(w http.ResponseWriter, r *http.Request) {
-	err := r.ParseForm()
+	t, err := app.entries.LatestTopics()
+	if err != nil {
+		app.serverError(w, err)
+		return
+	}
+	err = r.ParseForm()
 	if err != nil {
 		app.clientError(w, http.StatusBadRequest)
 		return
@@ -74,19 +79,24 @@ func (app *application) createEntry(w http.ResponseWriter, r *http.Request) {
 	form.Required("title", "content", "user")
 	form.MaxLength("title", 50)
 	form.MaxLength("user", 40)
+	form.MinLength("user", 3)
 
 	if !form.Valid() {
-		t, err := app.entries.LatestTopics()
-		if err != nil {
-			app.serverError(w, err)
-			return
-		}
-
 		app.render(w, r, "create.page.tmpl", &templateData{
 			Form:   form,
 			Topics: t,
 		})
+		return
+	}
 
+	_, err = app.users.Authenticate(form.Get("user"), form.Get("password"))
+	if err != nil {
+		if errors.Is(err, models.ErrInvalidCredentials) {
+			form.Errors.Add("generic", "Name or Password is incorrect")
+			app.render(w, r, "create.page.tmpl", &templateData{Form: form})
+		} else {
+			app.serverError(w, err)
+		}
 		return
 	}
 

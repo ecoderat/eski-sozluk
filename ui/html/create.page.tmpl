@@ -28,7 +28,13 @@
             {{end}}
             <input type="text" id="fname" name="user" value='{{.Get "user"}}'>
             <label for="pwd">şifresi:</label>
-            <input type="password" id="pwd" name="pwd"> 
+            {{with .Errors.Get "password"}}
+                <label class='error'>{{.}}</label>
+            {{end}}
+            <input type="password" id="pwd" name="password"> 
+            {{with .Errors.Get "generic"}}
+                <label class='error'>{{.}}</label>
+            {{end}}
             <br><br>
             <input type="submit" value="yolla">
             <div class="clear"></div>
