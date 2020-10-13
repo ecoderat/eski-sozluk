@@ -76,10 +76,11 @@ go run ./cmd
 - [x] Adding middleware
 
 #### features related to user
+- [x] Creating a users table on the database
+- [x] User authentication
+- [x] Creating a users model
+- [ ] Log in/Sign up page
 - [ ] Running a HTTPS server
-- [ ] Creating a users table on the database
-- [ ] User authentication
-- [ ] Creating a users model
 
 #### entry search features
 ...
